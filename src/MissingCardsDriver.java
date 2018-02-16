@@ -1,6 +1,4 @@
-
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.FileInputFormat;
 import org.apache.hadoop.mapred.FileOutputFormat;
@@ -15,7 +13,7 @@ public class MissingCardsDriver {
 		JobConf conf = new JobConf(MissingCardsDriver.class);
 		conf.setJobName("Missing Cards Job");
 		conf.setOutputKeyClass(Text.class);
-		conf.setOutputValueClass(IntWritable.class);
+		conf.setOutputValueClass(Text.class);
 		conf.setMapperClass(MissingCardsMapper.class);
 		conf.setReducerClass(MissingCardsReducer.class);
 		conf.setInputFormat(TextInputFormat.class);
@@ -24,18 +22,5 @@ public class MissingCardsDriver {
 		FileOutputFormat.setOutputPath(conf, new Path(args[1]));
 		JobClient.runJob(conf);
 
-		// Job job = Job.getInstance(new Configuration(), "Missing Cards Job");
-		// job.setJarByClass(MissingCardsDriver.class);
-		// TextInputFormat.addInputPath(job, new Path(args[0]));
-		// job.setInputFormatClass(TextInputFormat.class);
-		// job.setMapperClass(MissingCardsMapper.class);
-		// job.setReducerClass(MissingCardsReducer.class);
-		// TextOutputFormat.setOutputPath(job, new Path(args[1]));
-		// job.setMapOutputKeyClass(Text.class);
-		// job.setMapOutputValueClass(IntWritable.class);
-		// job.setOutputFormatClass(TextOutputFormat.class);
-		// job.setOutputKeyClass(Text.class);
-		// job.setOutputValueClass(Text.class);
-		// System.exit(job.waitForCompletion(true) ? 0 : -1);
 	}
 }
